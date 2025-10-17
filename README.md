@@ -1,146 +1,151 @@
+تمام — دي نسخة جاهزة للصق مباشرة في `README.md`، مع استبدال **Ghost C2** بـ **Dragon C2** كما طلبت. انسخ كل شيء داخل الكتلة التالية:
+
+````markdown
 <!-- Badges -->
 [![SECURITY](https://img.shields.io/badge/SECURITY-critical?style=flat-square&color=ff2d55&labelColor=2f2f2f)](https://example.com)
 [![AWARENESS](https://img.shields.io/badge/AWARENESS-important?style=flat-square&color=ff6f3c&labelColor=2f2f2f)](https://example.com)
 [![PYTHON](https://img.shields.io/badge/PYTHON-3.x?style=flat-square&color=3776ab&labelColor=2f2f2f)](https://www.python.org/)
-[![GUI](https://img.shields.io/badge/GUI-yes?style=flat-square&color=6c757d&labelColor=2f2f2f)](https://example.com)
-[![TKINTER](https://img.shields.io/badge/TKINTER-UI?style=flat-square&color=4b5563&labelColor=2f2f2f)](https://docs.python.org/3/library/tkinter.html)
-[![USE](https://img.shields.io/badge/USE-tool?style=flat-square&color=6c6f72&labelColor=2f2f2f)](https://example.com)
+[![GUI](https://img.shields.io/badge/GUI-Tkinter?style=flat-square&color=6c757d&labelColor=2f2f2f)](https://docs.python.org/3/library/tkinter.html)
 [![EDUCATIONAL](https://img.shields.io/badge/EDUCATIONAL-yes?style=flat-square&color=4caf50&labelColor=2f2f2f)](https://example.com)
-[![NETWORK](https://img.shields.io/badge/NETWORK-focused?style=flat-square&color=bd6b1e&labelColor=2f2f2f)](https://example.com)
-[![ISOLATED](https://img.shields.io/badge/ISOLATED-lab_only?style=flat-square&color=f4c542&labelColor=2f2f2f)](https://example.com)
-[![MODE](https://img.shields.io/badge/MODE-test?style=flat-square&color=6b7280&labelColor=2f2f2f)](https://example.com)
-[![DEMO](https://img.shields.io/badge/DEMO-available?style=flat-square&color=8b5cf6&labelColor=2f2f2f)](https://example.com)
+[![VM_ONLY](https://img.shields.io/badge/VM--ONLY-lab_only?style=flat-square&color=f4c542&labelColor=2f2f2f)](https://example.com)
+[![NETWORK](https://img.shields.io/badge/NETWORK-isolated?style=flat-square&color=bd6b1e&labelColor=2f2f2f)](https://example.com)
+[![DEMO](https://img.shields.io/badge/DEMO-mode?style=flat-square&color=8b5cf6&labelColor=2f2f2f)](https://example.com)
 
-# Dragon C2 — Command & Control Framework (Educational / Defensive)
+# Dragon C2 — Educational C2 Framework (VM-only)
 
-> **Purpose:** Dragon C2 is presented here as an educational / research-oriented command-and-control (C2) framework. The README describes architecture, defensive use-cases, and lab exercises only. It intentionally avoids step-by-step offensive instructions or deployment procedures that could be used to compromise systems without authorization.
+**Security Awareness • Python 3.x • Tkinter • Educational • VM Only • Network Isolated • Demo Mode**
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)  
-- [Features](#features)  
-- [High-level Architecture](#high-level-architecture)  
-- [Requirements & Environment](#requirements--environment)  
-- [Safe & Authorized Usage](#safe--authorized-usage)  
-- [Security, Compliance & Legal](#security-compliance--legal)  
-- [Detection & Mitigation Guidance (for Blue Teams)](#detection--mitigation-guidance-for-blue-teams)  
-- [Recommended Lab Exercises](#recommended-lab-exercises)  
-- [Contributing](#contributing)  
-- [License](#license)  
-- [Contact](#contact)
+> ⚠️ **Important — Read Before Running**  
+> This project is strictly for educational, defensive, and research purposes only. **Do NOT** run this software against any system you do not own or do not have explicit written permission to test. Test **only** inside an isolated virtual machine (VM) or a dedicated lab environment that is not connected to production networks or the public Internet. The author/maintainer is not responsible for any misuse.
 
 ---
 
 ## Overview
 
-Dragon C2 is intended as a learning tool for red-team/blue-team exercises, security training, and research. It provides a conceptual GUI dashboard for observing C2 workflows: listeners, payload generation (conceptual), sessions, file browsing, and quick actions for data collection. This repository and documentation are focused on **education, detection, and defensive hardening**.
+Dragon C2 is a graphical (Tkinter) educational Command & Control (C2) framework designed to demonstrate C2 concepts in a safe lab environment. It is intended for students and security researchers to study session handling, remote commands, and basic file interactions — strictly in isolated VMs.
+
+This repository and documentation focus on education, detection, and defensive understanding. Offensive deployment details and any use outside authorized lab environments are explicitly disallowed.
 
 ---
 
-## Features
+## Features (Educational Only)
 
-- Centralized GUI dashboard for monitoring sessions and activity.  
-- Conceptual payload generator interface (for lab simulation).  
-- Sessions pane for session lifecycle visibility.  
-- File browser (UI view) for simulated file operations.  
-- Shell/command area for interaction in controlled lab scenarios (non-actionable here).  
-- Quick Actions panel (predefined information-gathering tasks for lab scenarios).  
-- Detailed logging and output for auditing and analysis.
+- Start/stop a listener on a chosen port (GUI-controlled).  
+- Manage multiple sessions (identified by source IP) and select an active session.  
+- Send simple shell-like commands and receive simulated responses.  
+- Browse remote file listings (demo/simulation mode).  
+- Receive file-like payloads (screenshots, logs) and store them locally in a designated folder (e.g., `c2_loot/`).  
 
 ---
 
-## High-level Architecture
+## Usage — High-level (VM only)
 
-This section explains components at a non-actionable level to help defenders and researchers understand typical C2 patterns.
+> **IMPORTANT:** Follow the guidance below **only** inside isolated VMs configured for testing and learning.
 
-- **GUI / Control Console:** Single-pane dashboard aggregating listeners, sessions, file browsing, and logs. Useful for visualization in training scenarios.  
-- **Listener:** Conceptual component that receives inbound connections from agents/beacons in a lab environment.  
-- **Agent (Client):** Lightweight component that, in a controlled lab, simulates endpoint behavior and communicates with the listener. **Deployment instructions are intentionally omitted.**  
-- **Transport Channels:** Common options in C2 designs include long-lived TCP, HTTP(s), and WebSocket channels; defenders should monitor all of these for anomalous patterns.  
-- **Persistence & Storage:** Session metadata and logs should be stored securely (e.g., encrypted storage) within lab environments.
+### 1) Start the listener (Attacker VM)
+- Open the project inside your attacker VM.  
+- Run the main GUI controller (adjust to the actual script name you have):
+```bash
+python3 "Dragon C2.py"
+````
 
----
+* In the GUI set the listening port (for example `4444`) and click **Start**.
+* The GUI should indicate **Listening** when ready.
 
-## Requirements & Environment
+### 2) Configure the agent (Victim VM)
 
-- Host OS capable of running GUI tools (Windows, Linux, or macOS depending on implementation).  
-- Appropriate runtime (Python 3.x, or another runtime if the implementation specifies).  
-- Virtualized/isolated network environment (VMs, segmented lab VLANs) strongly recommended for all testing.  
-- Monitoring & telemetry (SIEM, EDR, network IDS) available to observe and log test activity.
+* Edit the provided sample agent template (e.g., `templates/agent_template.py`) and set the attacker VM IP and port:
 
----
+```py
+ATTACKER_IP = "192.168.56.101"  # lab-only attacker VM IP
+ATTACKER_PORT = 4444            # port chosen in the GUI
+```
 
-## Safe & Authorized Usage
+* For safe demos, use the included `sim_agent.py` which **echoes** commands rather than executing them:
 
-- **Only use within authorized scope.** Obtain explicit, documented permission from the system owner before running any tests.  
-- Use Dragon C2 exclusively inside isolated lab networks or during approved red-team engagements with written rules of engagement (RoE).  
-- Avoid running simulations on production systems or networks that contain sensitive data without prior approval and remediation plans.
+```bash
+python3 sim_agent.py
+```
 
----
+* After the agent connects, the attacker GUI will show a new session entry.
 
-## Security, Compliance & Legal
+### 3) Send commands from the GUI
 
-- Always follow local and international laws — unauthorized access is illegal.  
-- Maintain an approved scope of work, escalation contacts, and rollback procedures before beginning tests.  
-- Encrypt stored logs and use secure channels for any remote communication inside the lab.  
-- Follow a responsible disclosure process for any vulnerabilities discovered during research.
+* Select the active session (the connected IP).
+* Type a simple command (safe, non-destructive), e.g.:
 
----
+```
+echo Hello from Dragon C2
+```
 
-## Detection & Mitigation Guidance (for Blue Teams)
+* Responses will appear in the output/log panel (simulated/echoed in demo mode).
 
-This section lists defensive indicators and suggested mitigations to help detect and respond to potential C2-like activity.
+### 4) File browser & receiving files
 
-### Common Indicators
-- Unusual outbound connections to rarely-seen destinations or over uncommon ports.  
-- Periodic or scheduled beaconing patterns from endpoints.  
-- Unknown binaries appearing in persistence locations or startup entries.  
-- Processes performing uncommon activities (screen capture, log access, or network scanning).
-
-### Detection Techniques
-- Monitor for periodic, patterned outbound traffic (beacon detection).  
-- Correlate process behavior with network telemetry (EDR + network logs).  
-- Use YARA-like rules for unusual binaries and hash-based blacklists for known malware.  
-- Inspect scheduled tasks, services, and startup entries for unauthorized changes.
-
-### Mitigations
-- Implement least privilege and reduce unnecessary administrative rights.  
-- Enforce application allowlisting where possible.  
-- Deploy EDR with behavioral detection and response playbooks.  
-- Segment the network and restrict outbound connections except where required.
+* Use the File Browser pane to request directory listings from the simulated agent.
+* Downloaded or received files (screenshots, logs) are saved to `c2_loot/` on the attacker VM for inspection.
 
 ---
 
-## Recommended Lab Exercises
+## Examples
 
-All exercises are intended for isolated lab environments only.
+**Run the listener on port 5555**
 
-1. **Visibility Exercise:** Simulate a benign agent that opens periodic outbound connections; use SIEM to detect and create alerting rules based on frequency and destination.  
-2. **Behavioral Detection:** Generate sample process behaviors (file read/write, network call) and tune EDR to trigger on anomalous sequences.  
-3. **Rule Development:** Create sample detection rules (Snort/Suricata signatures or Sigma rules) that catch suspicious C2-like traffic patterns.  
-4. **Recovery Drill:** Practice rollback and remediation steps after a simulated compromise (isolate host, collect forensic artifacts, recover from backups).
+```bash
+python3 "Dragon C2.py"
+```
+
+In GUI: set `Port = 5555` → Click **Start**
+
+**Configure and run the agent (victim)**
+Edit `templates/agent_template.py`:
+
+```py
+ATTACKER_IP = "192.168.56.101"
+ATTACKER_PORT = 5555
+```
+
+Run on victim VM (use `sim_agent.py` for safe demo):
+
+```bash
+python3 sim_agent.py
+```
+
+**Send a safe command from the GUI**
+
+* Type `echo ping-test` and press Enter (or click Send). The simulated agent will echo back a response to the GUI output.
 
 ---
 
-## Contributing
+## Storage & Output
 
-- Contributions are welcome for defensive features: detection rules, lab scenarios, documentation improvements, and defensive playbooks.  
-- Please use responsible disclosure channels to report issues or potential vulnerabilities.  
-- When proposing changes that relate to detection, include test artifacts (in a sanitized form) and clear instructions to reproduce in an isolated lab.
+* Files and simulated artifacts received from agents are stored under:
 
----
+```
+c2_loot/
+```
 
-## License
-
-Choose a license that clearly states permitted uses and restrictions. For educational/defensive projects you may consider a license with explicit clauses preventing malicious use (consult legal counsel for exact wording). Example options: MIT with additional terms, or a custom internal license.
+* Logs and session metadata are kept locally in the attacker VM. Ensure this storage is inside your isolated lab and not backed up to production systems.
 
 ---
 
-## Contact
+## Security & Lab Guidance
 
-For questions, defensive guidance, or to request lab scenarios/templates, open an issue in the repository or contact the maintainers via the official project channels.
+* **Isolate the lab**: Keep attacker and victim VMs inside an isolated virtual network that has no route to production or the public Internet.
+* **Least privilege**: Run all demos with minimal privileges required by the simulation.
+* **Monitoring**: Use an observer VM (SIEM/EDR) in the lab to capture telemetry and practice detection.
+* **Rollback plan**: Keep VM snapshots/backups to restore known-good states after exercises.
+* **Legal compliance**: Always obtain documented, explicit authorization for anything beyond local lab demos.
 
 ---
 
+## Recommended Lab Exercises (Educational)
+
+1. **Beacon Detection:** Simulate periodic outbound beacons and create SIEM alerts to detect them.
+2. **Behavior Detection:** Generate benign file I/O and network activity; adjust EDR behavioral rules to flag suspicious patterns.
+3. **Forensics Drill:** Capture disk and memory artifacts from a simulated session and perform forensic analysis.
+4. **Detection Rule Authoring:** Write Sigma / Suricata / Snort signatures to detect demo C2 patterns in the lab.
+
+```
