@@ -1,7 +1,6 @@
 <!-- Badges -->
 [![SECURITY](https://img.shields.io/badge/SECURITY-critical?style=flat-square&color=ff2d55&labelColor=2f2f2f)](https://example.com)
 [![AWARENESS](https://img.shields.io/badge/AWARENESS-important?style=flat-square&color=ff6f3c&labelColor=2f2f2f)](https://example.com)
-[![PYTHON](https://img.shields.io/badge/PYTHON-3.x?style=flat-square&color=3776ab&labelColor=2f2f2f)](https://www.python.org/)
 [![GUI](https://img.shields.io/badge/GUI-Tkinter?style=flat-square&color=6c757d&labelColor=2f2f2f)](https://docs.python.org/3/library/tkinter.html)
 [![EDUCATIONAL](https://img.shields.io/badge/EDUCATIONAL-yes?style=flat-square&color=4caf50&labelColor=2f2f2f)](https://example.com)
 [![VM_ONLY](https://img.shields.io/badge/VM--ONLY-lab_only?style=flat-square&color=f4c542&labelColor=2f2f2f)](https://example.com)
