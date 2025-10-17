@@ -1,3 +1,6 @@
+تمام — دي نسخة جاهزة للصق مباشرة في `README.md`، مع استبدال **Ghost C2** بـ **Dragon C2** كما طلبت. انسخ كل شيء داخل الكتلة التالية:
+
+````markdown
 <!-- Badges -->
 [![SECURITY](https://img.shields.io/badge/SECURITY-critical?style=flat-square&color=ff2d55&labelColor=2f2f2f)](https://example.com)
 [![AWARENESS](https://img.shields.io/badge/AWARENESS-important?style=flat-square&color=ff6f3c&labelColor=2f2f2f)](https://example.com)
@@ -45,94 +48,125 @@ This repository and documentation focus on education, detection, and defensive u
 - Run the main GUI controller (adjust to the actual script name you have):
 ```bash
 python3 "Dragon C2.py"
-In the GUI set the listening port (for example 4444) and click Start.
+````
 
-The GUI should indicate Listening when ready.
+* In the GUI set the listening port (for example `4444`) and click **Start**.
+* The GUI should indicate **Listening** when ready.
 
-2) Configure the agent (Victim VM)
+### 2) Configure the agent (Victim VM)
 
-Edit the provided sample agent template (e.g., templates/agent_template.py) and set the attacker VM IP and port:
+* Edit the provided sample agent template (e.g., `templates/agent_template.py`) and set the attacker VM IP and port:
 
+```py
 ATTACKER_IP = "192.168.56.101"  # lab-only attacker VM IP
 ATTACKER_PORT = 4444            # port chosen in the GUI
+```
 
+* For safe demos, use the included `sim_agent.py` which **echoes** commands rather than executing them:
 
-For safe demos, use the included sim_agent.py which echoes commands rather than executing them:
-
+```bash
 python3 sim_agent.py
+```
 
+* After the agent connects, the attacker GUI will show a new session entry.
 
-After the agent connects, the attacker GUI will show a new session entry.
+### 3) Send commands from the GUI
 
-3) Send commands from the GUI
+* Select the active session (the connected IP).
+* Type a simple command (safe, non-destructive), e.g.:
 
-Select the active session (the connected IP).
-
-Type a simple command (safe, non-destructive), e.g.:
-
+```
 echo Hello from Dragon C2
+```
 
+* Responses will appear in the output/log panel (simulated/echoed in demo mode).
 
-Responses will appear in the output/log panel (simulated/echoed in demo mode).
+### 4) File browser & receiving files
 
-4) File browser & receiving files
+* Use the File Browser pane to request directory listings from the simulated agent.
+* Downloaded or received files (screenshots, logs) are saved to `c2_loot/` on the attacker VM for inspection.
 
-Use the File Browser pane to request directory listings from the simulated agent.
+---
 
-Downloaded or received files (screenshots, logs) are saved to c2_loot/ on the attacker VM for inspection.
+## Examples
 
-Examples
+**Run the listener on port 5555**
 
-Run the listener on port 5555
-
+```bash
 python3 "Dragon C2.py"
+```
 
+In GUI: set `Port = 5555` → Click **Start**
 
-In GUI: set Port = 5555 → Click Start
+**Configure and run the agent (victim)**
+Edit `templates/agent_template.py`:
 
-Configure and run the agent (victim)
-Edit templates/agent_template.py:
-
+```py
 ATTACKER_IP = "192.168.56.101"
 ATTACKER_PORT = 5555
+```
 
+Run on victim VM (use `sim_agent.py` for safe demo):
 
-Run on victim VM (use sim_agent.py for safe demo):
-
+```bash
 python3 sim_agent.py
+```
 
+**Send a safe command from the GUI**
 
-Send a safe command from the GUI
+* Type `echo ping-test` and press Enter (or click Send). The simulated agent will echo back a response to the GUI output.
 
-Type echo ping-test and press Enter (or click Send). The simulated agent will echo back a response to the GUI output.
+---
 
-Storage & Output
+## Storage & Output
 
-Files and simulated artifacts received from agents are stored under:
+* Files and simulated artifacts received from agents are stored under:
 
+```
 c2_loot/
+```
 
+* Logs and session metadata are kept locally in the attacker VM. Ensure this storage is inside your isolated lab and not backed up to production systems.
 
-Logs and session metadata are kept locally in the attacker VM. Ensure this storage is inside your isolated lab and not backed up to production systems.
+---
 
-Security & Lab Guidance
+## Security & Lab Guidance
 
-Isolate the lab: Keep attacker and victim VMs inside an isolated virtual network that has no route to production or the public Internet.
+* **Isolate the lab**: Keep attacker and victim VMs inside an isolated virtual network that has no route to production or the public Internet.
+* **Least privilege**: Run all demos with minimal privileges required by the simulation.
+* **Monitoring**: Use an observer VM (SIEM/EDR) in the lab to capture telemetry and practice detection.
+* **Rollback plan**: Keep VM snapshots/backups to restore known-good states after exercises.
+* **Legal compliance**: Always obtain documented, explicit authorization for anything beyond local lab demos.
 
-Least privilege: Run all demos with minimal privileges required by the simulation.
+---
 
-Monitoring: Use an observer VM (SIEM/EDR) in the lab to capture telemetry and practice detection.
+## Recommended Lab Exercises (Educational)
 
-Rollback plan: Keep VM snapshots/backups to restore known-good states after exercises.
+1. **Beacon Detection:** Simulate periodic outbound beacons and create SIEM alerts to detect them.
+2. **Behavior Detection:** Generate benign file I/O and network activity; adjust EDR behavioral rules to flag suspicious patterns.
+3. **Forensics Drill:** Capture disk and memory artifacts from a simulated session and perform forensic analysis.
+4. **Detection Rule Authoring:** Write Sigma / Suricata / Snort signatures to detect demo C2 patterns in the lab.
 
-Legal compliance: Always obtain documented, explicit authorization for anything beyond local lab demos.
+---
 
-Recommended Lab Exercises (Educational)
+## Contributing
 
-Beacon Detection: Simulate periodic outbound beacons and create SIEM alerts to detect them.
+Contributions are welcome **for defensive and educational improvements**: documentation, lab scenarios, detection rules, sanitized test artifacts, and GUI improvements. Please submit PRs or open issues and ensure contributions follow the project’s safe-use policy.
 
-Behavior Detection: Generate benign file I/O and network activity; adjust EDR behavioral rules to flag suspicious patterns.
+When reporting bugs or vulnerabilities, follow responsible disclosure: do not publish exploit details; provide reproduction steps limited to isolated lab environments.
 
-Forensics Drill: Capture disk and memory artifacts from a simulated session and perform forensic analysis.
+---
 
-Detection Rule Authoring: Write Sigma / Suricata / Snort signatures to detect demo C2 patterns in the lab.
+## License & Disclaimer
+
+Choose a license that enforces educational and defensive usage (consult legal counsel if needed). This project is provided for educational purposes only. The author/maintainer accepts no liability for misuse or unauthorized deployment.
+
+---
+
+## Contact
+
+For questions, defensive guidance, or to request lab templates and detection rule examples, open an issue in this repository or contact the maintainers through the project channels.
+
+```
+
+```
